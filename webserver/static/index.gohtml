@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GoTube - YouTube but shitty</title>
+</head>
+<body>
+    <form action="/search" method="POST">
+        <label>Search: </label>
+        <input type="text" name="s"/><br>
+        <label>Max Results: </label>
+        <input type="number" name="max"/>
+        <input type="submit" name="Search"/>
+    </form>
+    <br><br><br><br>
+
+    <h1>Channels</h1>
+    {{ range .Channels }}
+        <a href="https://youtube.com/channel/{{ .Id.ChannelId }}">{{ .Snippet.ChannelTitle }}</a><br>
+    {{ end }}
+    <br><br>
+    <h1>Videos</h1>
+    {{ range .Videos }}
+        <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/{{ .Id.VideoId }}"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+        </iframe>
+    {{ end }}
+</body>
+</html>
